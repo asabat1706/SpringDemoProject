@@ -20,9 +20,6 @@ public class ContactService {
 
     public boolean saveMessageDetails(Contact contact){
         contact.setStatus("OPEN");
-        contact.setCreated_by("Anonymous");
-        contact.setCreate_date(LocalDateTime.now());
-
         Contact savedContact = contactRepository.save(contact);
 
         boolean isSaved = false;
@@ -38,12 +35,10 @@ public class ContactService {
         return contactRepository.findByStatus(status);
     }
 
-    public void updateMsgStatus(int id, String name) {
+    public void updateMsgStatus(int id) {
         Contact contact = contactRepository.findById(id).get();
         if(Objects.nonNull(contact)){
             contact.setStatus("CLOSED");
-            contact.setLast_update_by(name);
-            contact.setLast_update_date(LocalDateTime.now());
         }
         contactRepository.save(contact);
     }

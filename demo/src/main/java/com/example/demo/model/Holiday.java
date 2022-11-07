@@ -2,16 +2,24 @@ package com.example.demo.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
+import javax.persistence.Id;
+
 
 @Data
-public class Holiday extends AuditEntity{
+@Entity
+@Table(name="holidays")
+public class Holiday extends AuditEntity {
 
-    private final String day;
-    private final String reason;
-    private final Type type;
+    @Id
+    private String day;
+
+    private String reason;
+
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
     public enum Type {
         FESTIVAL, FEDERAL
     }
-
 }
